@@ -13,6 +13,20 @@
   margin-bottom: 8px;
   margin-left: auto;  /* ← تغيير: يدفع العنوان لليسار */
 }
+@media (max-width: 480px) {
+    .header-logo-area img { max-width: 260px; max-height: 130px; }
+    .form-title h1 { font-size: 17px; }
+    .form-title img { max-height: 55px; }
+    .section { padding: 15px 15px; }
+    .section-header { margin: -15px -15px 15px; }
+    .btn-row { padding: 12px 15px; gap: 8px; }
+    .btn { padding: 10px 16px; font-size: 13px; }
+    .btn-submit { padding: 10px 20px; }
+    .closed-card { padding: 30px 20px; }
+    #adminPanel, #adminLoginBox { width: 92vw; padding: 25px 18px; }
+}
+
+ 
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
     font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
@@ -376,9 +390,9 @@
 <div class="main">
   <div class="form-card">
 <div class="form-title">
-  <div style="display: flex; align-items: center; gap: 6px;">
-    <h1 style="margin: 0; font-size: 22px; flex: 1;">تسجل طلبات التحصين بمحافظة شمال الباطنة</h1>
-    <img src="https://fastupload.live/do.php?img=11318" alt="شعار" style="max-height: 90px; width: auto; flex-shrink: 0; margin-inline-start: 10px;">
+  <div style="display: flex; align-items: center; gap: 6px; flex-wrap: nowrap;">
+    <h1 style="margin: 0; font-size: 22px; flex: 1; min-width: 0;">تسجل طلبات التحصين بمحافظة شمال الباطنة</h1>
+    <img src="https://fastupload.live/do.php?img=11318" alt="شعار" style="max-height: 90px; width: auto; flex-shrink: 0; margin-inline-start: auto;">
   </div>
   <p class="required-note" style="margin-top: 6px;">* تشير إلى أنّ السؤال مطلوب</p>
 </div>
