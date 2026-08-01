@@ -871,22 +871,38 @@ if (step===2) {
       valid = checkField('licenseExpiry', v=>v.trim()!=='')       && valid;
     }
 if (step===4) {
-  const goats = document.getElementById('goats').value;
-  const sheep = document.getElementById('sheep').value;
-  const cows  = document.getElementById('cows').value;
-  const filled = [goats, sheep, cows].filter(v => v !== '' && parseInt(v) > 0).length;
-  if (filled === 0) {
-    document.getElementById('goats').classList.add('error');
-    document.getElementById('sheep').classList.add('error');
-    document.getElementById('cows').classList.add('error');
+  const animalFields = [
+    { id:'goats', name:'الماعز' },
+    { id:'sheep', name:'الضأن'  },
+    { id:'cows',  name:'الأبقار' }
+  ];
+  let filled = 0, hasZero = false;
+
+  animalFields.forEach(f => {
+    const el  = document.getElementById(f.id);
+    const err = document.getElementById(f.id + '-err');
+    const v   = el.value.trim();
+    el.classList.remove('error');
+    err.classList.remove('show');
+    if (v === '') return;                 // فارغة = لا يملك هذا النوع
+    const n = parseInt(v);
+    if (isNaN(n) || n <= 0) {
+      el.classList.add('error');
+      err.textContent = '⚠️ لا يمكن إدخال صفر — إذا كنت لا تملك ' + f.name + ' اترك الخانة فارغة';
+      err.classList.add('show');
+      hasZero = true;
+    } else {
+      filled++;
+    }
+  });
+
+  if (hasZero) {
+    valid = false;
+  } else if (filled === 0) {
+    animalFields.forEach(f => document.getElementById(f.id).classList.add('error'));
     document.getElementById('goats-err').textContent = 'يجب إدخال عدد نوع واحد على الأقل من الحيوانات';
     document.getElementById('goats-err').classList.add('show');
     valid = false;
-  } else {
-    ['goats','sheep','cows'].forEach(id => {
-      document.getElementById(id).classList.remove('error');
-      document.getElementById(id+'-err').classList.remove('show');
-    });
   }
 }
     return valid;
