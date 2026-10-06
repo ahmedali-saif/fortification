@@ -22,7 +22,7 @@
   100% { filter: drop-shadow(0 0 18px rgba(255, 215, 0, 0.9)) brightness(1.25); }
 }
 
-/* نافذة المصمم (مودال) */
+/* نافذة الم (مودال) */
 .designer-modal {
   display: none;
   position: fixed;
@@ -68,6 +68,15 @@
 .designer-icon {
   font-size: 48px;
   margin-bottom: 12px;
+}
+ .designer-icon img {
+  width: 110px;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #1a5c38;
+  display: block;
+  margin: 0 auto;
 }
 .designer-title {
   font-size: 18px;
@@ -143,7 +152,23 @@
     animation: spin 0.8s linear infinite;
   }
   #initScreen span { font-size: 15px; }
-
+  .init-designer {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.35);
+    border-radius: 16px;
+    padding: 20px 28px;
+    text-align: center;
+    font-size: 15px;
+    line-height: 1.9;
+    max-width: 90vw;
+  }
+  .init-designer img {
+    width: 100px; height: 100px;
+    object-fit: cover; border-radius: 50%;
+    border: 3px solid white;
+    display: block; margin: 0 auto 10px;
+  }
+  .init-designer-title { font-size: 13px; opacity: 0.85; }
   /* شاشة النموذج مغلق */
   #closedScreen {
     display: none; position: fixed; inset: 0;
@@ -401,6 +426,12 @@
 
 <!-- شاشة التحميل الأولي -->
 <div id="initScreen">
+  <div class="init-designer">
+    <img src="https://dlivsidtmmtvrqhtxmlu.supabase.co/storage/v1/object/public/assets/WhatsApp%20Image%202026-09-25%20at%204.05.40%20PM.jpeg" alt="صورة المصمم">
+    <div class="init-designer-title">صُمِّم بواسطة</div>
+    <div>أحمد بن علي بن سيف البادي</div>
+    <div>فني حقول — دائرة الثروة الحيوانية</div>
+  </div>
   <div class="spinner"></div>
   <span>جارٍ التحقق من حالة النموذج...</span>
 </div>
@@ -416,9 +447,6 @@
     </div>
   </div>
 </div>
-
-<!-- زر المالك المخفي — z-index أعلى من كل شيء -->
-<button id="ownerBtn" onclick="openAdminOverlay()" title="إعدادات">⚙</button>
 
 <!-- Admin Overlay -->
 <div id="adminOverlay">
@@ -469,12 +497,12 @@
 
 </div>
 
-<!-- نافذة المصمم (مودال) -->
+<!-- نافذة الم (مودال) -->
 <div class="designer-modal" id="designerModal" onclick="if(event.target===this) closeDesignerModal()">
   <div class="designer-card">
     <button class="designer-close" onclick="closeDesignerModal()">✕</button>
-    <div class="designer-icon">🖌️</div>
-    <div class="designer-title">صُمِّم بواسطة</div>
+    <div class="designer-icon"><img src="https://dlivsidtmmtvrqhtxmlu.supabase.co/storage/v1/object/public/assets/WhatsApp%20Image%202026-09-25%20at%204.05.40%20PM.jpeg" alt="صورة المصمم"></div>
+   <div class="designer-title">صُمِّم بواسطة</div>
     <div class="designer-info">
       <div><strong>الاسم:</strong> أحمد بن علي بن سيف البادي</div>
       <div><strong>الوظيفة:</strong> فني حقول</div>
@@ -506,7 +534,7 @@
 <div class="form-title">
   <div style="display: flex; align-items: center; gap: 6px; flex-wrap: nowrap;">
     <h1 style="margin: 0; font-size: 22px; flex: 1; min-width: 0;">تسجل طلبات التحصين بمحافظة شمال الباطنة</h1>
-    <!-- تم إضافة onclick لفتح نافذة المصمم -->
+    <!-- تم إضافة onclick لفتح نافذة الم -->
     <img src="https://drive.google.com/thumbnail?id=1SCikSeDL7RJvNZ9Zo52S2P0DIA1gMHoj&sz=w1000" alt="شعار" class="logo-glow" onclick="openDesignerModal()" style="max-height: 90px; width: auto; flex-shrink: 0; margin-inline-start: auto;">
   </div>
   <p class="required-note" style="margin-top: 6px;">* تشير إلى أنّ السؤال مطلوب</p>
@@ -525,13 +553,7 @@
         <div class="field-group">
           <label class="field-label">الولاية <span class="req">*</span></label>
           <select id="wilaya" onchange="onWilayaChange()">
-            <option value="">اختيار</option>
-            <option value="السويق">السويق</option>
-            <option value="الخابورة">الخابورة</option>
-            <option value="صحم">صحم</option>
-            <option value="صحار">صحار</option>
-            <option value="لوى">لوى</option>
-            <option value="شناص">شناص</option>
+            <option value="">جاري التحميل...</option>
           </select>
           <div class="error-msg" id="wilaya-err">الرجاء اختيار الولاية</div>
         </div>
@@ -590,9 +612,9 @@
         <div class="section-header info">يرجى استكمال البيانات قبل المتابعة.</div>
         <div class="field-group">
           <label class="field-label">رقم الحيازة الحيوانية <span class="req">*</span></label>
-         <div class="field-hint">يجب إدخال رقم الحيازة بصيغة أرقام فقط (مثال: 123456) أو بالنمط رقمين / أرقام مع مسافة قبل الشرطة أو بعدها (مثال: 12 / 3456)</div>
-          <input type="text" id="licenseNum" placeholder="إدخالك">
-         <div class="error-msg" id="licenseNum-err">رقم الحيازة يجب أن يكون أرقام فقط، أو رقمين بالضبط قبل الشرطة مع مسافة قبلها أو بعدها (مثال: 12 / 3456)</div>
+         <div class="field-hint">يجب إدخال رقم الحيازة بصيغة أرقام فقط (مثال: 123456) أو بالنمط رقمين / أرقام (مثال: 04/789)</div>
+         <input type="text" id="licenseNum" placeholder="إدخالك">
+         <div class="error-msg" id="licenseNum-err">رقم الحيازة يجب أن يكون أرقام فقط، أو رقمين بالضبط ثم شرطة ثم أرقام (مثال: 04/789)</div>
         </div>
         <div class="field-group">
           <label class="field-label">تاريخ انتهاء الحيازة الحيوانية <span class="req">*</span></label>
@@ -650,36 +672,51 @@
 </div>
 
 <script>
-  const GAS = "https://script.google.com/macros/s/AKfycbzFa7UQnzSDH3xDMalSuWswXB_kZ3hoY8mqnBc17CpA_Scam1TkbOnvdpDa9hYw3sK53g/exec";
+  const SB_URL = "https://dlivsidtmmtvrqhtxmlu.supabase.co";
+  const SB_KEY = "sb_publishable_V6SFHbK9hmB7C9TeUk9MSA_my2Wauec";
 
-  const WILAYA_COLUMNS = {
-    "السويق":"A","الخابورة":"B","صحم":"C",
-    "صحار":"D","لوى":"E","شناص":"F"
-  };
-
+  async function sbRpc(fn, args) {
+    const r = await fetch(SB_URL + '/rest/v1/rpc/' + fn, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'apikey': SB_KEY },
+      body: JSON.stringify(args || {})
+    });
+    const j = await r.json().catch(() => null);
+    if (!r.ok) throw new Error((j && j.message) || 'تعذّر الاتصال بالخادم');
+    return j;
+  }
   let currentStep    = 1;
   let skippedLicense = false;
   let serverStatus   = 'OPEN';
   let sessionPin     = null;
 
   async function initPage() {
+    const sel = document.getElementById('wilaya');
     try {
-      const res  = await fetch(GAS + '?action=getRegistrationStatus');
-      const data = await res.json();
-      serverStatus = data.status || 'OPEN';
+      const info = await sbRpc('public_form_info');
+      serverStatus = info.open ? 'OPEN' : 'CLOSED';
+      sel.innerHTML = '<option value="">اختيار</option>';
+      (info.clinics || []).forEach(c => {
+        const o = document.createElement('option');
+        o.value = c.id;
+        o.textContent = String(c.name)
+          .replace(/^(العيادة البيطرية\s*(بولاية)?|عيادة|ولاية)\s*/, '').trim();
+        sel.appendChild(o);
+      });
     } catch(e) {
-      serverStatus = 'OPEN';
+      serverStatus = 'CLOSED';
+      document.querySelector('#closedScreen .closed-msg').textContent =
+        'تعذّر الاتصال بالخادم — يُرجى المحاولة لاحقاً.';
     }
     applyStatus(serverStatus);
-    document.getElementById('initScreen').style.display = 'none';
-  }
+    setTimeout(() => { document.getElementById('initScreen').style.display = 'none'; }, 2500);  }
 
   function applyStatus(s) {
     serverStatus = s;
     document.getElementById('closedScreen').classList.toggle('show', s === 'CLOSED');
   }
 
-  // ----- دوال نافذة المصمم -----
+  // ----- دوال نافذة الم -----
   function openDesignerModal() {
     document.getElementById('designerModal').classList.add('show');
     document.body.style.overflow = 'hidden'; // منع التمرير خلف النافذة
@@ -804,9 +841,7 @@
     rs.innerHTML = '<option value="">جاري التحميل...</option>';
     rg.style.display = 'block';
     try {
-      const col = WILAYA_COLUMNS[wilaya];
-      const res = await fetch(GAS+'?action=getRegions&column='+encodeURIComponent(col));
-      const regions = await res.json();
+      const regions = await sbRpc('public_regions', { p_wilayat: Number(wilaya) });
       rs.innerHTML = '<option value="">اختيار</option>';
       regions.forEach(r => {
         if (r && r.toString().trim()) {
@@ -822,21 +857,8 @@
     if (!validateStep(2)) return;
     const phone      = document.getElementById('phone').value.trim();
     const hasLicense = document.querySelector('input[name="hasLicense"]:checked')?.value;
-    showLoading('جاري التحقق من البيانات...');
-    try {
-const civilId = document.getElementById('civilId').value.trim();
-const res    = await fetch(GAS+'?action=checkPhone&phone='+encodeURIComponent(phone)+'&civilId='+encodeURIComponent(civilId));
-const result = await res.json();
-hideLoading();
-if (result.exists) {
-  const msg = result.reason === 'civilId' ? 'الرقم المدني مسجل مسبقاً' : 'رقم الهاتف مسجل مسبقاً';
-  alert(msg);
-}
-      else {
-        if (hasLicense === 'لا') { skippedLicense=true; document.getElementById('dot3').classList.add('done'); goStep(4); }
-        else { skippedLicense=false; goStep(3); }
-      }
-    } catch(e) { hideLoading(); alert('حدث خطأ في التحقق من رقم الهاتف'); }
+    if (hasLicense === 'لا') { skippedLicense = true; document.getElementById('dot3').classList.add('done'); goStep(4); }
+    else { skippedLicense = false; goStep(3); }
   }
 
   function goBackFromStep4() { goStep(skippedLicense ? 2 : 3); }
@@ -869,8 +891,8 @@ if (step===2) {
       if (!licVal) { licErr.classList.add('show'); valid=false; } else licErr.classList.remove('show');
     }
     if (step===3) {
-      valid = checkField('licenseNum',    v=>/^\d+$/.test(v.trim()) || /^\d{2}(\s+\/\s*|\s*\/\s+)\d+$/.test(v.trim())) && valid;
-      valid = checkField('licenseExpiry', v=>v.trim()!=='')       && valid;
+     valid = checkField('licenseNum',    v=>/^\d+$/.test(v.trim()) || /^\d{2}\s*\/\s*\d+$/.test(v.trim())) && valid;
+     valid = checkField('licenseExpiry', v=>v.trim()!=='')       && valid;
     }
 if (step===4) {
   const animalFields = [
@@ -955,37 +977,43 @@ function resetForm() {
     // استدعاء clearForm مع تخطي التأكيد
     clearForm(true);
 }
-  async function submitForm() {
+
+    async function submitForm() {
     if (!validateStep(4)) return;
     const hasLicense  = document.querySelector('input[name="hasLicense"]:checked')?.value;
-    const skipLicense = (hasLicense==='لا');
-    const data = {
-      wilaya:        document.getElementById('wilaya').value,
-      phone:         document.getElementById('phone').value,
-      fullName:      document.getElementById('fullName').value,
-      civilId:       document.getElementById('civilId').value,
-      region:        document.getElementById('region').value,
-      licenseNum:    skipLicense?'':document.getElementById('licenseNum').value,
-      licenseExpiry: skipLicense?'':document.getElementById('licenseExpiry').value,
-      goats:         document.getElementById('goats').value,
-      sheep:         document.getElementById('sheep').value,
-      cows:          document.getElementById('cows').value,
-      empty1:'',empty2:'',empty3:'',empty4:'',
-      dateOnly: new Date().toISOString().split('T')[0],
-    };
+    const skipLicense = (hasLicense === 'لا');
+    const v   = id => document.getElementById(id).value.trim();
+    const num = id => { const x = v(id); return x === '' ? null : parseInt(x, 10); };
+
     showLoading('جارٍ إرسال البيانات...');
-    document.getElementById('submitBtn').disabled=true;
+    document.getElementById('submitBtn').disabled = true;
     try {
-      const formData = new FormData();
-      Object.keys(data).forEach(k=>formData.append(k,data[k]));
-      await fetch(GAS,{method:'POST',mode:'no-cors',body:formData});
+      const res = await sbRpc('public_submit_vacc_request', {
+        p_wilayat:    Number(v('wilaya')),
+        p_phone:      v('phone'),
+        p_name:       v('fullName'),
+        p_region:     v('region'),
+        p_possession: skipLicense ? '' : v('licenseNum'),
+        p_civil:      v('civilId'),
+        p_expiry:     skipLicense ? null : (v('licenseExpiry') || null),
+        p_goats:      num('goats'),
+        p_sheep:      num('sheep'),
+        p_cattle:     num('cows'),
+        p_camels:     null,
+        p_notes:      ''
+      });
       hideLoading();
-      document.querySelectorAll('.step-page').forEach(p=>p.classList.remove('active'));
+      if (!res || !res.ok) {
+        document.getElementById('submitBtn').disabled = false;
+        alert((res && res.message) || 'تعذّر حفظ الطلب');
+        return;
+      }
+      document.querySelectorAll('.step-page').forEach(p => p.classList.remove('active'));
       document.getElementById('successScreen').classList.add('show');
     } catch(e) {
       hideLoading();
-      document.getElementById('submitBtn').disabled=false;
-      alert('حدث خطأ في الإرسال. يرجى التحقق من الاتصال والمحاولة مجدداً.');
+      document.getElementById('submitBtn').disabled = false;
+      alert('حدث خطأ في الإرسال: ' + e.message);
     }
   }
 
