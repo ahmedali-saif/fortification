@@ -612,9 +612,9 @@
         <div class="section-header info">يرجى استكمال البيانات قبل المتابعة.</div>
         <div class="field-group">
           <label class="field-label">رقم الحيازة الحيوانية <span class="req">*</span></label>
-         <div class="field-hint">يجب إدخال رقم الحيازة بصيغة أرقام فقط (مثال: 123456) أو بالنمط رقمين / أرقام (مثال: 04/789)</div>
+<div class="field-hint">رقم الحيازة يجب أن يكون أرقام فقط،(مثال:2730) أو (مثال:04/789)بدون مسافات</div>
          <input type="text" id="licenseNum" placeholder="إدخالك">
-         <div class="error-msg" id="licenseNum-err">رقم الحيازة يجب أن يكون أرقام فقط، أو رقمين بالضبط ثم شرطة ثم أرقام (مثال: 04/789)</div>
+         <div class="error-msg" id="licenseNum-err">رقم الحيازة يجب أن يكون أرقام فقط،(مثال:2730) أو (مثال:04/789)بدون مسافات</div>
         </div>
         <div class="field-group">
           <label class="field-label">تاريخ انتهاء الحيازة الحيوانية <span class="req">*</span></label>
@@ -891,7 +891,7 @@ if (step===2) {
       if (!licVal) { licErr.classList.add('show'); valid=false; } else licErr.classList.remove('show');
     }
     if (step===3) {
-     valid = checkField('licenseNum',    v=>/^\d+$/.test(v.trim()) || /^\d{2}\s*\/\s*\d+$/.test(v.trim())) && valid;
+     valid = checkField('licenseNum',    v=>/^\d+$/.test(v.trim()) || /^\d{2}\/\d+$/.test(v.trim())) && valid;
      valid = checkField('licenseExpiry', v=>v.trim()!=='')       && valid;
     }
 if (step===4) {
