@@ -379,6 +379,43 @@ input.error,select.error{border-color:var(--danger);background:#fff8f8}
   .appbar-title{font-size:14.5px}
   .counter input{width:54px}
 }
+
+/* ========== إصلاح النوافذ المنبثقة على الهواتف ========== */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+
+#alertModal{
+  overflow-y:auto;-webkit-overflow-scrolling:touch;
+  padding:16px 16px calc(16px + var(--safe-b));
+}
+.alert-card{
+  margin:auto;
+  max-height:calc(100vh - 32px);
+  max-height:calc(100dvh - 32px - var(--safe-b));
+  overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;
+}
+/* زر الإغلاق يبقى ظاهراً دائماً أسفل البطاقة */
+.alert-card .btn{
+  position:sticky;bottom:0;flex-shrink:0;
+  box-shadow:0 -14px 16px 2px #fff, 0 8px 20px rgba(220,38,38,.25);
+}
+
+/* تصغير المحتوى على الشاشات الصغيرة أو القصيرة */
+@media (max-width:420px), (max-height:720px){
+  .alert-card{padding:22px 18px 18px}
+  .alert-ico{width:60px;height:60px;margin-bottom:10px}
+  .alert-ico svg{width:32px;height:32px}
+  .alert-title{font-size:20px;margin-bottom:8px}
+  .alert-msg{font-size:16px;line-height:1.8;margin-bottom:10px}
+  .alert-note{font-size:14.5px;line-height:1.8;padding:10px 12px;margin-bottom:14px}
+  .alert-card .btn{height:50px;font-size:16px}
+}
+
+/* النوافذ السفلية (المصمم / لوحة المالك / تأكيد المحو) لا تتجاوز طول الشاشة */
+.designer-card,#adminLoginBox,#adminPanel,.confirm-card{
+  max-height:calc(100vh - 24px);
+  max-height:calc(100dvh - 24px);
+  overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;
+}
 </style>
 </head>
 <body>
